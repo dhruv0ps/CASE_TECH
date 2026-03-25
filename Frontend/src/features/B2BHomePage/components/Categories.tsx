@@ -1,34 +1,38 @@
 import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-// Category data — background images from Unsplash (real product photography)
+// Category data — real product images from case-tech.com
 const categories = [
   {
     name: 'Land Mobile Radio',
     tag: 'Core Product',
     desc: 'Hard leather & nylon holsters engineered for LMR portables.',
-    img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&auto=format&fit=crop&q=70',
+    img: 'https://case-tech.com/cart/images/15-5400.gif',
+    fallback: 'https://case-tech.com/cart/images/16-700N.gif',
     wide: true,
   },
   {
     name: 'Police Duty Gear',
     tag: 'Duty & Safety',
     desc: 'Heavy-duty belts and cases built to police specification.',
-    img: 'https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800&auto=format&fit=crop&q=70',
+    img: 'https://case-tech.com/cart/images/55-3000.gif',
+    fallback: 'https://case-tech.com/cart/images/330-400A.jpg',
     wide: false,
   },
   {
     name: 'Bar Code & Data Collection',
     tag: 'Industrial',
     desc: 'Rugged carry solutions for scanners and data terminals.',
-    img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=800&auto=format&fit=crop&q=70',
+    img: 'https://case-tech.com/cart/images/MC65nylon.jpg',
+    fallback: 'https://case-tech.com/cart/images/207-110mt.gif',
     wide: false,
   },
   {
     name: 'OEM & Custom Orders',
     tag: 'Contract',
     desc: 'End-to-end leather finishing and OEM volume manufacturing.',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=70',
+    img: 'https://case-tech.com/cart/images/200-08.jpg',
+    fallback: 'https://case-tech.com/cart/images/55-220.jpg',
     wide: true,
   },
 ];
@@ -66,11 +70,13 @@ const Categories = () => {
               onClick={() => navigate('/products')}
               className={`group relative rounded-2xl overflow-hidden cursor-pointer ${cat.wide && i === 0 ? 'lg:col-span-2' : ''} ${cat.wide && i === 3 ? 'lg:col-span-2' : ''}`}
             >
-              {/* BG image */}
+              {/* BG image — real product photo from case-tech.com with white bg overlay for visibility */}
+              <div className="absolute inset-0 bg-slate-800" />
               <img
                 src={cat.img}
                 alt={cat.name}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = (cat as any).fallback; }}
+                className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-700 ease-out"
               />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-500" />

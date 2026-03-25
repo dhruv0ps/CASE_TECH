@@ -13,7 +13,8 @@ const spotlights = [
       '1000 denier Kodra nylon chest pack designed to carry the Motorola/Symbol MC65 computer.',
       'Zippered pocket and a pen holder as well as a holder for the computer. Shoulder straps allow wide size adjustment — plastic side-release buckles for easy attachment.',
     ],
-    img: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=900&auto=format&fit=crop&q=80',
+    img: 'https://case-tech.com/cart/images/MC65nylon.jpg',
+    imgFallback: 'https://case-tech.com/cart/images/330-400A.jpg',
     imgPos: 'right', // image on right
     accent: 'cyan',
   },
@@ -27,7 +28,8 @@ const spotlights = [
       'Heavy-duty full-grain leather holster manufactured with our special heavy-duty stitching equipment.',
       'Fits a wide range of Land Mobile Portable Radios. Available with D-ring, swivel, or belt-loop attachment. Government volume pricing available.',
     ],
-    img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=900&auto=format&fit=crop&q=80',
+    img: 'https://case-tech.com/cart/images/15-5400.gif',
+    imgFallback: 'https://case-tech.com/cart/images/16-700N.gif',
     imgPos: 'left', // image on left
     accent: 'slate',
   },
@@ -53,11 +55,12 @@ const Products = () => {
             className={`flex flex-col ${isRight ? 'lg:flex-row' : 'lg:flex-row-reverse'} min-h-[70vh] ${i % 2 === 0 ? 'bg-white' : 'bg-subtle-50'}`}
           >
             {/* ── Image half ───────────────────────────────── */}
-            <div className="relative w-full lg:w-1/2 min-h-[400px] overflow-hidden">
+            <div className="relative w-full lg:w-1/2 min-h-[400px] overflow-hidden bg-slate-100 flex items-center justify-center">
               <img
                 src={product.img}
                 alt={product.name}
-                className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = (product as any).imgFallback; }}
+                className="w-full h-full object-contain p-8 hover:scale-105 transition-transform duration-700 ease-out"
               />
               {/* Model badge pinned to corner */}
               <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-md text-white text-xs font-black tracking-widest uppercase px-4 py-2 rounded-full border border-white/10">
