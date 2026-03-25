@@ -29,8 +29,8 @@ export default observer(function NavBar({ toggleSidebar, isSidebarOpen }: any) {
           <Dropdown.Item icon={HiCog}>Settings</Dropdown.Item>
           <Dropdown.Item icon={HiCurrencyDollar}>Earnings</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item icon={HiLogout} onClick={async () => {
-
+          <Dropdown.Item icon={HiLogout} onClick={() => {
+            navigate('/login')
           }}>Sign out</Dropdown.Item>
         </Dropdown>
         {isSidebarOpen ? <MdMenuOpen className="text-2xl mx-2 lg:hidden" onClick={() => toggleSidebar()} /> : <MdMenu className="text-2xl mx-2 lg:hidden" onClick={() => toggleSidebar()} />}
